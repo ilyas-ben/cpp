@@ -8,18 +8,19 @@
 
 <body>
     <div th:text="${id}" id="idToDelete"></div>
-    <div th:test=${nameOfClientToDelete} id="nameOfClientToDelete"></div>
-    <form id="deleteForm" method="post"></form>
+    <div th:text="${nameOfClientToDelete}" id="nameOfClientToDelete"></div>
+    <!-- <form id="deleteForm" method="delete"></form> -->
     <script>
         var nameOfClientToDelete = document.getElementById("nameOfClientToDelete").textContent;
-        var idToDelete = document.getElementById("idToDelete");
+        var idToDelete = document.getElementById("idToDelete").textContent;
         if (confirm("Do you wanna delete this client :" + nameOfClientToDelete + " ?")) {
-            var deleteForm = document.getElementById('deleteForm');
-            deleteForm.setAttribute('method', 'delete');
-            deleteForm.setAttribute('action', '/delete/' + idToDelete);
-            deleteForm.submit();
+            fetch("/clients/" + idToDelete, {
+                method: 'delete'
+            }).then(response => {
+
+            })
         } else {
-            widnow.location.href = "/clients/";
+            location.href = "/clients";
         }
     </script>
 </body>

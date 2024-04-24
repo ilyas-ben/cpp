@@ -50,9 +50,10 @@ public class ClientController {
 
         // DELETE CLIENT
     @GetMapping("/delete/{id}") // redirect to client delete confirmation
-    public String deleteForm(Model model, @PathVariable Long id){
+    public String deleteConfirm(Model model, @PathVariable Long id){
         model.addAttribute(id);
         model.addAttribute("nameOfClientToDelete", clientService.getClientById(id).getNom());
+        System.out.println(clientService.getClientById(id).getNom());
         return "deleteOrNot";
     }
 
@@ -61,6 +62,8 @@ public class ClientController {
         clientService.deleteClient(id);
         return "confirm";
     }
+
+    // update client
 
 
 
@@ -71,7 +74,7 @@ public class ClientController {
     }
 
     @GetMapping("/json/{id}")
-    public Client getClientById(@PathVariable Long id, Model model) {
+    public Client getClientById(@PathVariable Long id) {
         return clientService.getClientById(id);
     }
 
