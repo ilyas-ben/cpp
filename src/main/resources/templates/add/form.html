@@ -65,7 +65,7 @@
 <body>
     <div class="container">
         <h1>Formulaire Client</h1>
-        <form action="#" method="post" th:action="@{/clients/addC}" th:object="${client}">
+        <form action="#" method="post" th:action="@{/clients}" th:object="${client}">
             <div>
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" th:field="*{nom}" required>
