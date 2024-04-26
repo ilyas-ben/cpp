@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/****** Implement on success  *****/
+
+
 @Controller
 @RequestMapping("/clients") // KHRJTI 3LIA!  !!!!
 public class ClientController {
@@ -60,11 +64,13 @@ public class ClientController {
     @DeleteMapping("/{id}")
     public String deleteClientt(@PathVariable Long id){ // getting request from thymleaf form
         clientService.deleteClient(id);
-        return "confirm";
+        return "success";
     }
-
     // update client
-
+    @GetMapping("/clients/update/{id}")
+    public String updateClientt(@PathVariable Long id){
+        return "updateForm";
+    }
 
 
     // JSON
