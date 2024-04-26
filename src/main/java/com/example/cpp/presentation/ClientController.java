@@ -66,10 +66,20 @@ public class ClientController {
         clientService.deleteClient(id);
         return "success";
     }
+
+
     // update client
     @GetMapping("/clients/update/{id}")
-    public String updateClientt(@PathVariable Long id){
-        return "updateForm";
+    public String updateClientForm( Model model, @PathVariable Long id){
+        Client client = clientService.getClientById(id);
+        model.addAttribute(client);
+        return "update/updateForm";
+    }
+
+    @PutMapping
+    public String updateClientt(@RequestBody Client client){
+        clientService.saveClient(client);
+        return "success";
     }
 
 

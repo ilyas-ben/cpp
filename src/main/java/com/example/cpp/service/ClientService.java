@@ -36,6 +36,9 @@ public class ClientService {
     public void deleteClient(Long id) {
         clientRepo.deleteById(id);
     }
+    /*public void updateClient(Client client){
+        clientRepo.
+    }*/
 
     // Autres méthodes de service personnalisées si nécessaire
 }
