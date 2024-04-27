@@ -69,7 +69,7 @@ public class ClientController {
 
 
     // update client
-    @GetMapping("/clients/update/{id}")
+    @GetMapping("/update/{id}")
     public String updateClientForm( Model model, @PathVariable Long id){
         Client client = clientService.getClientById(id);
         model.addAttribute(client);
@@ -78,8 +78,8 @@ public class ClientController {
 
     @PutMapping
     public String updateClientt(@RequestBody Client client){
-        clientService.saveClient(client);
-        return "success";
+        clientService.updateClient(client);
+        return "redirect:/success.html";
     }
 
 

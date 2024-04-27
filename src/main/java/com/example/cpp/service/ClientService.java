@@ -33,6 +33,10 @@ public class ClientService {
         for(Client client : clients) clientRepo.save(client);
     }
 
+    public void updateClient(Client client){
+        clientRepo.updateClient(client);
+    }
+
     public void deleteClient(Long id) {
         clientRepo.deleteById(id);
     }

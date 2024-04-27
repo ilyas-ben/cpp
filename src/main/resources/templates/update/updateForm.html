@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <h1>Formulaire Client</h1>
-        <form action="#" method="put" th:action="@{/clients}" th:object="${client}">
+        <form id="updateForm" th:object="${client}">
             <div>
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" th:field="*{nom}" th:value="${client.nom}" required>
@@ -92,23 +92,46 @@
 </body>
 <script>
     function updateClient() {
-        // Récupérer les valeurs des champs du formulaire
+        // retrive manually input fields by teir id
         var nom = document.getElementById('nom').value;
         var adresse = document.getElementById('adresse').value;
         var email = document.getElementById('email').value;
         var telephone = document.getElementById('telephone').value;
 
-        // Créer un objet Client avec les valeurs récupérées
+        // Client object
         var client = {
-            nom: nom,
-            adresse: adresse,
+            name: name,
+            address: adresse,
             email: email,
             telephone: telephone
         };
 
-        // Utiliser l'objet Client comme nécessaire
-        console.log(client);
-        // Vous pouvez envoyer cet objet via AJAX ou effectuer d'autres opérations ici
+        // Convert the object to JSON
+        var jsonClient = JSON.stringify(client);
+        console.log(jsonClient);
+
+        // Sending the AJAX request
+        fetch('/clients', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonClient
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.log(response.status);
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Client sended successfully:', data);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
     }
 </script>
 
