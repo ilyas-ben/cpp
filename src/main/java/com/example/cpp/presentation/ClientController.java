@@ -78,8 +78,10 @@ public class ClientController {
 
     @PutMapping
     public String updateClientt(@RequestBody Client client){
+        System.out.println("update client FETCH");
+        System.out.println("Client recu : "+ client );
         clientService.updateClient(client);
-        return "redirect:/success.html";
+        return "success";
     }
 
 
