@@ -21,7 +21,7 @@ public class ClientController {
     private ClientService clientService;
 
 
-                                            /******** methods *****/
+                                /* METHODS */
     // DISPLAY CLIENT(S)
     @GetMapping
     public String getAllClients(Model model){
@@ -46,23 +46,23 @@ public class ClientController {
         return "add/form";
     }
     @PostMapping
-    public String saveClient(@ModelAttribute("client") Client client){
+    public String saveClient(@ModelAttribute("client") Client client){ // submit the new client
         clientService.saveClient(client);
         return "success";
     }
 
 
         // DELETE CLIENT
-    @GetMapping("/delete/{id}") // redirect to client delete confirmation
+    @GetMapping("/delete/{id}") // redirect to client delete confirmation page
     public String deleteConfirm(Model model, @PathVariable Long id){
         model.addAttribute(id);
-        model.addAttribute("nameOfClientToDelete", clientService.getClientById(id).getNom());
+        model.addAttribute("nameOfClientToDelete", clientService.getClientById(id).getNom()); // just to display it in the confirmation
         System.out.println(clientService.getClientById(id).getNom());
         return "deleteOrNot";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteClientt(@PathVariable Long id){ // getting request from thymleaf form
+    public String deleteClientt(@PathVariable Long id){ // submittting the delete request
         clientService.deleteClient(id);
         return "success";
     }
@@ -70,16 +70,14 @@ public class ClientController {
 
     // update client
     @GetMapping("/update/{id}")
-    public String updateClientForm( Model model, @PathVariable Long id){
+    public String updateClientForm( Model model, @PathVariable Long id){ // redirect to update form
         Client client = clientService.getClientById(id);
         model.addAttribute(client);
         return "update/updateForm";
     }
 
     @PutMapping
-    public String updateClientt(@RequestBody Client client){
-        System.out.println("update client FETCH");
-        System.out.println("Client recu : "+ client );
+    public String updateClientt(@RequestBody Client client){ // submittting the update request
         clientService.updateClient(client);
         return "success";
     }

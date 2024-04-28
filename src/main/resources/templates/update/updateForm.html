@@ -87,13 +87,14 @@
                 <input type="tel" id="telephone" name="telephone" th:field="*{telephone}" th:value="${client.telephone}"
                     required>
             </div>
-            <button onclick="updateClient()" type="submit">Enregistrer</button>
+            <button onclick="updateClientSubmit()" type="submit">Enregistrer</button>
+            <!--khrjti 3lia kan3lia mnsba7 ndirlik eventlistener -->
         </form>
     </div>
 </body>
 <script>
-    function updateClient() {
 
+    function updateClientSubmit() {
         // retrive manually input fields by teir id
         var id = document.getElementById('idClient').value;
         var nom = document.getElementById('nom').value;
@@ -101,50 +102,40 @@
         var email = document.getElementById('email').value;
         var telephone = document.getElementById('telephone').value;
 
-        // Client object
-        var jsonClient = {
+        var clientToUpdate = {
             id: id,
-            nom: nom,
+            nom: nom, // nom n french is name
             email: email,
             adresse: adresse,
             telephone: telephone
         }
 
-        alert('jsonClient');
+        // converting the object in json
+        var clientToUpdateInJson = JSON.stringify(clientToUpdate);
 
         fetch('http://localhost:8080/clients', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(jsonClient)
+            body: clientToUpdateInJson
+        }).then(response => {
+            if (response.status == 200) {
+                alert("Client modified !");
+                location.href = '/clients/' + jsonClient.id;
+            }
         })
-            .then(response => {
-                if (response.status == 200) {
-                    alert("Client modified !");
-                    location.href = '/clients/' + jsonClient.id;
-                }
-            })
             .catch(error => {
                 console.error('Erreur lors de la requête :', error);
             });
     }
-
+    // canceling of form's  default action to prevent any issue with the ajax request
     document.addEventListener('DOMContentLoaded', function () {
-        // Sélection du formulaire
         var form = document.getElementById("updateForm");
-
-        // Ajout d'un écouteur d'événements sur l'événement "submit"
         form.addEventListener('submit', function (event) {
-            // Annulation de l'action par défaut du formulaire
             event.preventDefault();
-
-            // Vous pouvez ajouter ici votre propre logique pour traiter les données du formulaire ou effectuer d'autres actions
         });
     });
-
-
-
 </script>
 
 </html>
