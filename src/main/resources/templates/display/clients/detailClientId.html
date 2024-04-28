@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,15 +41,18 @@
         }
     </style>
 </head>
+
 <body>
-<div class="container">
-    <h1>Détails du Client</h1>
-    <div class="client-details">
-        <p><strong>Nom :</strong> <span th:text="${client.nom}"></span></p>
-        <p><strong>Adresse :</strong> <span th:text="${client.adresse}"></span></p>
-        <p><strong>Email :</strong> <span th:text="${client.email}"></span></p>
-        <p><strong>Téléphone :</strong> <span th:text="${client.telephone}"></span></p>
+    <div class="container">
+        <h1>Détails du Client</h1>
+        <div class="client-details">
+            <p><strong>Nom :</strong> <span th:text="${client.nom}"></span></p>
+            <p><strong>Adresse :</strong> <span th:text="${client.adresse}"></span></p>
+            <p><strong>Email :</strong> <span th:text="${client.email}"></span></p>
+            <p><strong>Téléphone :</strong> <span th:text="${client.telephone}"></span></p>
+        </div>
+        <a href="/clients">Go back to list clients</a>
     </div>
-</div>
 </body>
+
 </html>

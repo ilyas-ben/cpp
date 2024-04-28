@@ -18,7 +18,10 @@
             fetch("/clients/" + idToDelete, {
                 method: 'delete'
             }).then(response => {
-
+                if (response.status == 200) {
+                    alert(nameOfClientToDelete + ' has been deleted !');
+                    location.href = "/clients";
+                }
             })
         } else {
             location.href = "/clients";
